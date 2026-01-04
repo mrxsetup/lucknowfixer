@@ -8,139 +8,99 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Poppins',sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
 
-/* 🔥 VERY STRONG BACKGROUND ANIMATION */
+/* 🔥 BACKGROUND COLOR CHANGE – VERY CLEAR */
 body{
   min-height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
+  animation:bgChange 5s infinite alternate;
   color:#fff;
-  animation:bgColor 6s infinite alternate;
 }
-
-@keyframes bgColor{
+@keyframes bgChange{
   0%{background:#020409;}
-  50%{background:#061a3a;}
-  100%{background:#12002b;}
+  50%{background:#0b2f70;}
+  100%{background:#3a004b;}
 }
 
 .card{
   width:520px;
-  max-width:95%;
-  background:rgba(255,255,255,.08);
-  backdrop-filter:blur(18px);
-  border-radius:28px;
-  padding:40px 30px;
+  background:rgba(255,255,255,.1);
+  padding:40px;
+  border-radius:30px;
   text-align:center;
   box-shadow:0 30px 90px rgba(0,0,0,.9);
 }
 
 /* PROFILE IMAGE */
 .avatar{
-  width:120px;
-  height:120px;
+  width:120px;height:120px;
   border-radius:50%;
-  object-fit:cover;
   border:4px solid gold;
 }
 
-/* 🔥 NAME ZOOM EFFECT (CLEAR) */
+/* 🔥 NAME ZOOM + GLOW */
 .name{
   margin-top:18px;
-  font-size:30px;
+  font-size:32px;
   font-weight:800;
   color:gold;
-  letter-spacing:2px;
-  animation:nameZoom 1.5s infinite alternate;
+  animation:nameZoom 1.4s infinite alternate;
   text-shadow:0 0 20px gold;
 }
-
 @keyframes nameZoom{
-  from{transform:scale(1);}
-  to{transform:scale(1.3);}
+  from{transform:scale(1)}
+  to{transform:scale(1.3)}
 }
 
-.subtitle{
-  font-size:13px;
-  opacity:.8;
-}
-
-/* LEAGUE BOX */
+/* LEAGUE IMAGE */
 .league-box{
-  margin:18px auto;
-  width:110px;
-  height:110px;
-  border-radius:22px;
+  margin:20px auto;
+  width:110px;height:110px;
+  border-radius:25px;
   background:linear-gradient(135deg,#00eaff,#ffd700,#ff3cac);
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  display:flex;align-items:center;justify-content:center;
 }
-
 .league-box img{
   max-width:75%;
-  max-height:75%;
-  object-fit:contain;
 }
 
 /* TIMER */
 .timer{
   font-size:40px;
   font-weight:800;
-  margin:12px 0;
   color:#00eaff;
 }
 
-/* TEXT */
-.text h2{
-  color:gold;
-  margin:14px 0 8px;
-}
-
-/* 🔥 VIP TEXT (VERY VISIBLE) */
-.vip-text{
-  margin-top:16px;
-  font-size:15px;
+/* VIP TEXT */
+.vip{
+  margin:16px 0;
   font-weight:800;
   color:#00eaff;
-  animation:vipBlink 1s infinite;
+  animation:blink 1s infinite;
+}
+@keyframes blink{
+  0%{opacity:1}
+  50%{opacity:.3}
+  100%{opacity:1}
 }
 
-@keyframes vipBlink{
-  0%{opacity:1;}
-  50%{opacity:.4;}
-  100%{opacity:1;}
-}
-
-/* 🔥 BUTTON STRONG ZOOM */
+/* 🔥 BUTTON ZOOM */
 .cta{
   display:inline-block;
-  margin-top:14px;
   padding:16px 42px;
   border-radius:40px;
   background:#0b66ff;
   color:gold;
   font-weight:900;
   text-decoration:none;
-  animation:btnZoom 1.3s infinite alternate;
+  animation:btnZoom 1.2s infinite alternate;
 }
-
 @keyframes btnZoom{
-  from{transform:scale(1);}
-  to{transform:scale(1.35);}
-}
-
-.footer{
-  margin-top:16px;
-  font-size:12px;
-  opacity:.7;
+  from{transform:scale(1)}
+  to{transform:scale(1.35)}
 }
 </style>
 </head>
@@ -149,58 +109,42 @@ body{
 
 <div class="card">
 
-  <!-- PROFILE IMAGE -->
-  <img class="avatar"
-  src="https://github.com/mrxsetup/lucknowfixer/blob/main/lucknowfixer.jpg?raw=true">
+<img class="avatar"
+src="https://github.com/mrxsetup/lucknowfixer/blob/main/lucknowfixer.jpg?raw=true">
 
-  <!-- NAME -->
-  <div class="name">LUCKNOW FIXXER</div>
-  <div class="subtitle">Cricket Prediction Analyst</div>
+<div class="name">LUCKNOW FIXXER</div>
 
-  <!-- ROTATING IMAGE BOX -->
-  <div class="league-box">
-    <img id="leagueLogo"
-    src="https://github.com/mrxsetup/lucknowfixer/blob/main/assets/logo16.png?raw=true">
-  </div>
+<div class="league-box">
+  <img id="logo"
+  src="https://github.com/mrxsetup/lucknowfixer/blob/main/assets/logo16.png?raw=true">
+</div>
 
-  <!-- TIMER -->
-  <div id="timer" class="timer">1:00</div>
+<div id="timer" class="timer">1:00</div>
 
-  <div class="text">
-    <h2>We Predict • You Win 💰</h2>
-    🏆 <b>INDIAN PREMIER LEAGUE – 74/77 PASSED</b><br>
-    🏆 <b>WBBL – 64/67 PASSED</b>
-  </div>
+<p><b>🏆 IPL – 74/77 PASSED</b><br><b>🏆 WBBL – 64/67 PASSED</b></p>
 
-  <!-- 🔥 VIP TEXT -->
-  <div class="vip-text">💎 VIP & Paid Predictions Available</div>
+<div class="vip">💎 VIP & Paid Predictions Available</div>
 
-  <!-- BUTTON -->
-  <a class="cta" href="https://t.me/" target="_blank">JOIN TELEGRAM</a>
-
-  <div class="footer">For Education Only • No Fixing</div>
+<a class="cta" href="https://t.me/">JOIN TELEGRAM</a>
 
 </div>
 
 <script>
-// TIMER
-let sec = 60;
+let sec=60;
 setInterval(()=>{
-  document.getElementById("timer").innerText =
-  "0:" + String(sec).padStart(2,"0");
-  if(sec>0) sec--;
+ document.getElementById("timer").innerText="0:"+String(sec).padStart(2,"0");
+ if(sec>0)sec--;
 },1000);
 
-// ROTATING IMAGES (ONLY 3)
-const logos=[
- "https://github.com/mrxsetup/lucknowfixer/blob/main/assets/logo16.png?raw=true",
- "https://github.com/mrxsetup/lucknowfixer/blob/main/assets/logo15.png?raw=true",
- "https://github.com/mrxsetup/lucknowfixer/blob/main/lucknowfixer.jpg?raw=true"
+const imgs=[
+"https://github.com/mrxsetup/lucknowfixer/blob/main/assets/logo16.png?raw=true",
+"https://github.com/mrxsetup/lucknowfixer/blob/main/assets/logo15.png?raw=true",
+"https://github.com/mrxsetup/lucknowfixer/blob/main/lucknowfixer.jpg?raw=true"
 ];
 let i=0;
 setInterval(()=>{
-  i=(i+1)%logos.length;
-  document.getElementById("leagueLogo").src=logos[i];
+ i=(i+1)%imgs.length;
+ document.getElementById("logo").src=imgs[i];
 },2000);
 </script>
 
