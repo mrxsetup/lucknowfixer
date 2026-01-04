@@ -17,11 +17,24 @@
 
 body{
     min-height:100vh;
-    background:#020409;
     display:flex;
     align-items:center;
     justify-content:center;
     color:#fff;
+    overflow:hidden;
+}
+
+/* 🔥 BACKGROUND ANIMATION (FIXED) */
+.animated-bg{
+    position:fixed;
+    inset:0;
+    background:radial-gradient(circle at top,#0b2f70,#020409);
+    animation:bgMove 8s infinite alternate;
+    z-index:-1;
+}
+@keyframes bgMove{
+    from{filter:hue-rotate(0deg)}
+    to{filter:hue-rotate(40deg)}
 }
 
 .card{
@@ -44,26 +57,20 @@ body{
     border:4px solid gold;
 }
 
-/* 🔥 NAME ANIMATION (FIXED) */
+/* 🔥 NAME ZOOM + GLOW */
 .name-animate{
     margin-top:18px;
     color:gold;
     font-size:30px;
     letter-spacing:2px;
-    animation:nameZoom 1.8s infinite alternate ease-in-out;
+    animation:nameZoom 2s infinite alternate ease-in-out;
     text-shadow:
         0 0 10px gold,
-        0 0 25px gold,
-        0 0 45px orange;
+        0 0 30px orange;
 }
-
 @keyframes nameZoom{
-    from{
-        transform:scale(1);
-    }
-    to{
-        transform:scale(1.25);
-    }
+    from{transform:scale(1)}
+    to{transform:scale(1.25)}
 }
 
 .subtitle{
@@ -71,7 +78,7 @@ body{
     opacity:.8;
 }
 
-/* LEAGUE BOX */
+/* LEAGUE LOGO BOX */
 .league-box{
     margin:18px auto;
     width:110px;
@@ -81,15 +88,14 @@ body{
     display:flex;
     align-items:center;
     justify-content:center;
+    box-shadow:0 0 25px rgba(0,234,255,.9);
 }
-
 .league-box img{
     max-width:75%;
     max-height:75%;
     object-fit:contain;
     animation:slide .7s ease;
 }
-
 @keyframes slide{
     from{opacity:0;transform:scale(.6)}
     to{opacity:1;transform:scale(1)}
@@ -109,32 +115,44 @@ body{
     margin:15px 0 8px;
 }
 
-/* 🔥 BUTTON ANIMATION (FIXED STRONG) */
+/* 🔥 VIP TEXT (RESTORED) */
+.vip-text{
+    margin-top:14px;
+    font-size:14px;
+    font-weight:700;
+    color:#00eaff;
+    animation:blink 1.5s infinite;
+}
+@keyframes blink{
+    0%,100%{opacity:1}
+    50%{opacity:.5}
+}
+
+/* 🔥 BUTTON ZOOM */
 .cta{
     display:inline-block;
-    margin-top:22px;
+    margin-top:14px;
     padding:16px 42px;
     border-radius:40px;
     background:linear-gradient(180deg,#0b2f70,#0b66ff);
     color:gold;
     font-weight:900;
     text-decoration:none;
-    animation:btnZoom 1.5s infinite alternate;
+    animation:btnZoom 1.6s infinite alternate;
     box-shadow:0 0 20px rgba(0,234,255,.8);
 }
-
 @keyframes btnZoom{
     from{
         transform:scale(1);
         box-shadow:0 0 20px rgba(0,234,255,.7);
     }
     to{
-        transform:scale(1.3);
+        transform:scale(1.25);
         box-shadow:0 0 50px rgba(0,234,255,1);
     }
 }
 
-.vip{
+.footer{
     margin-top:16px;
     font-size:12px;
     opacity:.75;
@@ -144,13 +162,15 @@ body{
 
 <body>
 
+<div class="animated-bg"></div>
+
 <div class="card">
 
     <!-- PROFILE IMAGE -->
     <img class="avatar"
     src="https://github.com/mrxsetup/lucknowfixer/blob/main/lucknowfixer.jpg?raw=true">
 
-    <!-- 🔥 NAME -->
+    <!-- NAME -->
     <div class="name-animate">LUCKNOW FIXXER</div>
     <div class="subtitle">Cricket Prediction Analyst</div>
 
@@ -170,12 +190,15 @@ body{
         🏆 <b>WBBL – 64/67 PASSED</b>
     </div>
 
-    <!-- 🔥 BUTTON -->
+    <!-- 🔥 VIP TEXT -->
+    <div class="vip-text">💎 VIP & Paid Predictions Available</div>
+
+    <!-- BUTTON -->
     <a class="cta" href="https://t.me/" target="_blank">
         JOIN TELEGRAM
     </a>
 
-    <div class="vip">For Education Only • No Fixing</div>
+    <div class="footer">For Education Only • No Fixing</div>
 
 </div>
 
@@ -194,7 +217,6 @@ const logos = [
  "https://github.com/mrxsetup/lucknowfixer/blob/main/assets/logo15.png?raw=true",
  "https://github.com/mrxsetup/lucknowfixer/blob/main/lucknowfixer.jpg?raw=true"
 ];
-
 let i=0;
 setInterval(()=>{
     i=(i+1)%logos.length;
