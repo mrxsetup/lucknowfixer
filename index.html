@@ -10,21 +10,31 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
 
-/* 🔥 BACKGROUND COLOR CHANGE – VERY CLEAR */
+/* BACKGROUND */
 body{
   min-height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
-  animation:bgChange 5s infinite alternate;
+  background:#020409;
   color:#fff;
 }
-@keyframes bgChange{
-  0%{background:#020409;}
-  50%{background:#0b2f70;}
-  100%{background:#3a004b;}
+
+/* 🔥 NEON BORDER WRAPPER */
+.neon-wrap{
+  position:relative;
+  padding:3px;
+  border-radius:34px;
+  background:linear-gradient(120deg,#00eaff,#ffd700,#ff3cac,#00eaff);
+  background-size:300% 300%;
+  animation:neonMove 6s linear infinite;
+}
+@keyframes neonMove{
+  0%{background-position:0% 50%}
+  100%{background-position:300% 50%}
 }
 
+/* CARD */
 .card{
   width:520px;
   background:rgba(255,255,255,.1);
@@ -34,37 +44,45 @@ body{
   box-shadow:0 30px 90px rgba(0,0,0,.9);
 }
 
-/* PROFILE IMAGE */
+/* PROFILE */
 .avatar{
-  width:120px;height:120px;
+  width:120px;
+  height:120px;
   border-radius:50%;
   border:4px solid gold;
 }
 
-/* 🔥 NAME ZOOM + GLOW */
+/* NAME */
 .name{
   margin-top:18px;
   font-size:32px;
   font-weight:800;
   color:gold;
-  animation:nameZoom 1.4s infinite alternate;
-  text-shadow:0 0 20px gold;
-}
-@keyframes nameZoom{
-  from{transform:scale(1)}
-  to{transform:scale(1.3)}
 }
 
-/* LEAGUE IMAGE */
+/* ROTATING BOX */
 .league-box{
+  position:relative;
   margin:20px auto;
-  width:110px;height:110px;
+  width:110px;
+  height:110px;
   border-radius:25px;
   background:linear-gradient(135deg,#00eaff,#ffd700,#ff3cac);
-  display:flex;align-items:center;justify-content:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
 }
 .league-box img{
+  position:absolute;
   max-width:75%;
+  max-height:75%;
+  opacity:0;
+  transform:translateX(100%) scale(.8);
+  animation:slideIn .6s ease forwards;
+}
+@keyframes slideIn{
+  to{opacity:1;transform:translateX(0) scale(1)}
 }
 
 /* TIMER */
@@ -72,22 +90,29 @@ body{
   font-size:40px;
   font-weight:800;
   color:#00eaff;
+  transition:.3s;
+}
+.timer.alert{
+  color:#ff3b3b;
+  animation:shake .4s infinite;
+  text-shadow:0 0 15px red;
+}
+@keyframes shake{
+  0%{transform:translateX(0)}
+  25%{transform:translateX(-4px)}
+  50%{transform:translateX(4px)}
+  75%{transform:translateX(-4px)}
+  100%{transform:translateX(0)}
 }
 
-/* VIP TEXT */
+/* VIP */
 .vip{
   margin:16px 0;
   font-weight:800;
   color:#00eaff;
-  animation:blink 1s infinite;
-}
-@keyframes blink{
-  0%{opacity:1}
-  50%{opacity:.3}
-  100%{opacity:1}
 }
 
-/* 🔥 BUTTON ZOOM */
+/* 🔥 MAGNET BUTTON */
 .cta{
   display:inline-block;
   padding:16px 42px;
@@ -96,17 +121,28 @@ body{
   color:gold;
   font-weight:900;
   text-decoration:none;
-  animation:btnZoom 1.2s infinite alternate;
+  position:relative;
+  overflow:hidden;
+  transition:.2s;
 }
-@keyframes btnZoom{
-  from{transform:scale(1)}
-  to{transform:scale(1.35)}
+.cta::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle,rgba(255,255,255,.6),transparent);
+  opacity:0;
+  transition:.3s;
 }
+.cta:active::after{
+  opacity:1;
+}
+
 </style>
 </head>
 
 <body>
 
+<div class="neon-wrap">
 <div class="card">
 
 <img class="avatar"
@@ -125,27 +161,48 @@ src="https://github.com/mrxsetup/lucknowfixer/blob/main/lucknowfixer.jpg?raw=tru
 
 <div class="vip">💎 VIP & Paid Predictions Available</div>
 
-<a class="cta" href="https://t.me/">JOIN TELEGRAM</a>
+<a class="cta" id="btn" href="https://t.me/">JOIN TELEGRAM</a>
 
+</div>
 </div>
 
 <script>
+// TIMER WITH ALERT
 let sec=60;
+const timer=document.getElementById("timer");
 setInterval(()=>{
- document.getElementById("timer").innerText="0:"+String(sec).padStart(2,"0");
- if(sec>0)sec--;
+  timer.innerText="0:"+String(sec).padStart(2,"0");
+  if(sec<=10) timer.classList.add("alert");
+  if(sec>0) sec--;
 },1000);
 
+// ROTATING IMAGES
 const imgs=[
-"https://github.com/mrxsetup/lucknowfixer/blob/main/assets/logo16.png?raw=true",
-"https://github.com/mrxsetup/lucknowfixer/blob/main/assets/logo15.png?raw=true",
-"https://github.com/mrxsetup/lucknowfixer/blob/main/lucknowfixer.jpg?raw=true"
+ "https://github.com/mrxsetup/lucknowfixer/blob/main/assets/logo16.png?raw=true",
+ "https://github.com/mrxsetup/lucknowfixer/blob/main/assets/logo15.png?raw=true",
+ "https://github.com/mrxsetup/lucknowfixer/blob/main/lucknowfixer.jpg?raw=true"
 ];
 let i=0;
+const logo=document.getElementById("logo");
 setInterval(()=>{
- i=(i+1)%imgs.length;
- document.getElementById("logo").src=imgs[i];
+  i=(i+1)%imgs.length;
+  logo.style.animation="none";
+  void logo.offsetWidth;
+  logo.src=imgs[i];
+  logo.style.animation="slideIn .6s ease forwards";
 },2000);
+
+// MAGNET BUTTON
+const btn=document.getElementById("btn");
+btn.addEventListener("mousemove",e=>{
+  const r=btn.getBoundingClientRect();
+  const x=e.clientX-r.left-r.width/2;
+  const y=e.clientY-r.top-r.height/2;
+  btn.style.transform=`translate(${x/6}px,${y/6}px)`;
+});
+btn.addEventListener("mouseleave",()=>{
+  btn.style.transform="translate(0,0)";
+});
 </script>
 
 </body>
