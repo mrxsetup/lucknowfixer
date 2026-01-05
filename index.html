@@ -5,72 +5,70 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lucknow Fixxer</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
 
-/* BACKGROUND */
+/* BACKGROUND COLOR ANIMATION */
 body{
   min-height:100vh;
   display:flex;
-  align-items:center;
   justify-content:center;
-  background:#020409;
+  align-items:center;
+  background:linear-gradient(-45deg,#020409,#0b1d3a,#020409,#3a004b);
+  background-size:400% 400%;
+  animation:bgMove 8s infinite alternate;
   color:#fff;
 }
-
-/* 🔥 NEON BORDER WRAPPER */
-.neon-wrap{
-  position:relative;
-  padding:3px;
-  border-radius:34px;
-  background:linear-gradient(120deg,#00eaff,#ffd700,#ff3cac,#00eaff);
-  background-size:300% 300%;
-  animation:neonMove 6s linear infinite;
-}
-@keyframes neonMove{
+@keyframes bgMove{
   0%{background-position:0% 50%}
-  100%{background-position:300% 50%}
+  100%{background-position:100% 50%}
 }
 
 /* CARD */
 .card{
   width:520px;
+  max-width:95%;
+  text-align:center;
   background:rgba(255,255,255,.1);
   padding:40px;
   border-radius:30px;
-  text-align:center;
   box-shadow:0 30px 90px rgba(0,0,0,.9);
 }
 
-/* PROFILE */
+/* PROFILE IMAGE */
 .avatar{
   width:120px;
   height:120px;
   border-radius:50%;
   border:4px solid gold;
+  object-fit:cover;
 }
 
-/* NAME */
+/* NAME ZOOM */
 .name{
-  margin-top:18px;
+  margin:18px 0;
   font-size:32px;
   font-weight:800;
   color:gold;
+  animation:zoomName 1.5s infinite alternate;
+  text-shadow:0 0 20px gold;
+}
+@keyframes zoomName{
+  from{transform:scale(1);}
+  to{transform:scale(1.2);}
 }
 
-/* ROTATING BOX */
+/* ROTATING IMAGE BOX */
 .league-box{
   position:relative;
-  margin:20px auto;
   width:110px;
   height:110px;
+  margin:20px auto;
   border-radius:25px;
   background:linear-gradient(135deg,#00eaff,#ffd700,#ff3cac);
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
   overflow:hidden;
 }
 .league-box img{
@@ -78,41 +76,35 @@ body{
   max-width:75%;
   max-height:75%;
   opacity:0;
-  transform:translateX(100%) scale(.8);
-  animation:slideIn .6s ease forwards;
+  transform:translateX(-100%) scale(0.7); /* slide from left */
+  animation:slideIn 0.7s ease forwards;
 }
 @keyframes slideIn{
-  to{opacity:1;transform:translateX(0) scale(1)}
+  0%{transform:translateX(-100%) scale(0.7); opacity:0;}
+  100%{transform:translateX(0%) scale(1); opacity:1;}
 }
 
 /* TIMER */
 .timer{
   font-size:40px;
-  font-weight:800;
+  font-weight:700;
   color:#00eaff;
-  transition:.3s;
-}
-.timer.alert{
-  color:#ff3b3b;
-  animation:shake .4s infinite;
-  text-shadow:0 0 15px red;
-}
-@keyframes shake{
-  0%{transform:translateX(0)}
-  25%{transform:translateX(-4px)}
-  50%{transform:translateX(4px)}
-  75%{transform:translateX(-4px)}
-  100%{transform:translateX(0)}
+  margin:12px 0;
 }
 
-/* VIP */
+/* VIP TEXT */
 .vip{
-  margin:16px 0;
+  margin:12px 0;
   font-weight:800;
   color:#00eaff;
+  animation:blink 1s infinite;
+}
+@keyframes blink{
+  0%,100%{opacity:1;}
+  50%{opacity:0.4;}
 }
 
-/* 🔥 MAGNET BUTTON */
+/* BUTTON */
 .cta{
   display:inline-block;
   padding:16px 42px;
@@ -121,62 +113,50 @@ body{
   color:gold;
   font-weight:900;
   text-decoration:none;
-  position:relative;
-  overflow:hidden;
-  transition:.2s;
+  margin-top:12px;
+  animation:btnZoom 1.3s infinite alternate;
 }
-.cta::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:radial-gradient(circle,rgba(255,255,255,.6),transparent);
-  opacity:0;
-  transition:.3s;
+@keyframes btnZoom{
+  from{transform:scale(1);}
+  to{transform:scale(1.25);}
 }
-.cta:active::after{
-  opacity:1;
-}
-
 </style>
 </head>
 
 <body>
-
-<div class="neon-wrap">
 <div class="card">
+  <!-- PROFILE -->
+  <img class="avatar" src="https://github.com/mrxsetup/lucknowfixer/blob/main/lucknowfixer.jpg?raw=true">
+  <div class="name">LUCKNOW FIXXER</div>
 
-<img class="avatar"
-src="https://github.com/mrxsetup/lucknowfixer/blob/main/lucknowfixer.jpg?raw=true">
+  <!-- ROTATING IMAGE BOX -->
+  <div class="league-box">
+    <img id="logo" src="https://github.com/mrxsetup/lucknowfixer/blob/main/assets/logo16.png?raw=true">
+  </div>
 
-<div class="name">LUCKNOW FIXXER</div>
+  <!-- TIMER -->
+  <div id="timer" class="timer">1:00</div>
 
-<div class="league-box">
-  <img id="logo"
-  src="https://github.com/mrxsetup/lucknowfixer/blob/main/assets/logo16.png?raw=true">
-</div>
+  <!-- PASSED INFO -->
+  <p><b>🏆 IPL – 74/77 PASSED</b><br><b>🏆 WBBL – 64/67 PASSED</b></p>
 
-<div id="timer" class="timer">1:00</div>
+  <!-- VIP -->
+  <div class="vip">💎 VIP & Paid Predictions Available</div>
 
-<p><b>🏆 IPL – 74/77 PASSED</b><br><b>🏆 WBBL – 64/67 PASSED</b></p>
-
-<div class="vip">💎 VIP & Paid Predictions Available</div>
-
-<a class="cta" id="btn" href="https://t.me/">JOIN TELEGRAM</a>
-
-</div>
+  <!-- BUTTON -->
+  <a class="cta" href="https://t.me/">JOIN TELEGRAM</a>
 </div>
 
 <script>
-// TIMER WITH ALERT
+// TIMER
 let sec=60;
 const timer=document.getElementById("timer");
 setInterval(()=>{
   timer.innerText="0:"+String(sec).padStart(2,"0");
-  if(sec<=10) timer.classList.add("alert");
   if(sec>0) sec--;
 },1000);
 
-// ROTATING IMAGES
+// ROTATING IMAGES INSIDE BOX
 const imgs=[
  "https://github.com/mrxsetup/lucknowfixer/blob/main/assets/logo16.png?raw=true",
  "https://github.com/mrxsetup/lucknowfixer/blob/main/assets/logo15.png?raw=true",
@@ -186,24 +166,11 @@ let i=0;
 const logo=document.getElementById("logo");
 setInterval(()=>{
   i=(i+1)%imgs.length;
-  logo.style.animation="none";
-  void logo.offsetWidth;
+  logo.style.animation="none"; // reset animation
+  void logo.offsetWidth; // trigger reflow
   logo.src=imgs[i];
-  logo.style.animation="slideIn .6s ease forwards";
+  logo.style.animation="slideIn 0.7s ease forwards"; // slide inside effect
 },2000);
-
-// MAGNET BUTTON
-const btn=document.getElementById("btn");
-btn.addEventListener("mousemove",e=>{
-  const r=btn.getBoundingClientRect();
-  const x=e.clientX-r.left-r.width/2;
-  const y=e.clientY-r.top-r.height/2;
-  btn.style.transform=`translate(${x/6}px,${y/6}px)`;
-});
-btn.addEventListener("mouseleave",()=>{
-  btn.style.transform="translate(0,0)";
-});
 </script>
-
 </body>
 </html>
