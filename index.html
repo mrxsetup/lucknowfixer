@@ -3,25 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lucknow Fixxer</title>
+<title>Lucknow Fixxer VIP</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
 
-/* BACKGROUND COLOR ANIMATION */
+/* BACKGROUND ANIMATION */
 body{
   min-height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  background:linear-gradient(-45deg,#020409,#0b1d3a,#020409,#3a004b);
+  background:linear-gradient(-45deg,#0b66ff,#0b2f70,#3a004b,#020409);
   background-size:400% 400%;
-  animation:bgMove 8s infinite alternate;
+  animation:bgMove 12s linear infinite;
   color:#fff;
 }
 @keyframes bgMove{
   0%{background-position:0% 50%}
-  100%{background-position:100% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
 
 /* CARD */
@@ -29,7 +30,7 @@ body{
   width:520px;
   max-width:95%;
   text-align:center;
-  background:rgba(255,255,255,.1);
+  background:rgba(255,255,255,.08);
   padding:40px;
   border-radius:30px;
   box-shadow:0 30px 90px rgba(0,0,0,.9);
@@ -42,23 +43,30 @@ body{
   border-radius:50%;
   border:4px solid gold;
   object-fit:cover;
+  box-shadow:0 0 20px gold;
+  animation:glowProfile 2s infinite alternate;
+}
+@keyframes glowProfile{
+  0%{box-shadow:0 0 15px gold;}
+  50%{box-shadow:0 0 30px gold;}
+  100%{box-shadow:0 0 15px gold;}
 }
 
-/* NAME ZOOM */
+/* NAME ZOOM + GLOW */
 .name{
   margin:18px 0;
   font-size:32px;
   font-weight:800;
   color:gold;
   animation:zoomName 1.5s infinite alternate;
-  text-shadow:0 0 20px gold;
+  text-shadow:0 0 15px gold, 0 0 25px #ffd700;
 }
 @keyframes zoomName{
   from{transform:scale(1);}
   to{transform:scale(1.2);}
 }
 
-/* ROTATING IMAGE BOX */
+/* ROTATING IMAGE BOX WITH 3D NEON */
 .league-box{
   position:relative;
   width:110px;
@@ -70,18 +78,21 @@ body{
   justify-content:center;
   align-items:center;
   overflow:hidden;
+  box-shadow:0 0 20px #00eaff,0 0 40px #ffd700;
+  perspective:500px;
 }
 .league-box img{
   position:absolute;
   max-width:75%;
   max-height:75%;
   opacity:0;
-  transform:translateX(-100%) scale(0.7); /* slide from left */
-  animation:slideIn 0.7s ease forwards;
+  transform:translateX(-100%) scale(0.7) rotateY(90deg);
+  animation:slideRotate 0.8s ease forwards;
+  filter:drop-shadow(0 0 15px #00eaff) drop-shadow(0 0 20px #ffd700);
 }
-@keyframes slideIn{
-  0%{transform:translateX(-100%) scale(0.7); opacity:0;}
-  100%{transform:translateX(0%) scale(1); opacity:1;}
+@keyframes slideRotate{
+  0%{transform:translateX(-100%) scale(0.7) rotateY(90deg); opacity:0;}
+  100%{transform:translateX(0%) scale(1) rotateY(0deg); opacity:1;}
 }
 
 /* TIMER */
@@ -90,6 +101,19 @@ body{
   font-weight:700;
   color:#00eaff;
   margin:12px 0;
+  transition:.3s;
+}
+.timer.alert{
+  color:#ff3b3b;
+  animation:shake .4s infinite;
+  text-shadow:0 0 15px red;
+}
+@keyframes shake{
+  0%{transform:translateX(0)}
+  25%{transform:translateX(-4px)}
+  50%{transform:translateX(4px)}
+  75%{transform:translateX(-4px)}
+  100%{transform:translateX(0)}
 }
 
 /* VIP TEXT */
@@ -104,7 +128,7 @@ body{
   50%{opacity:0.4;}
 }
 
-/* BUTTON */
+/* BUTTON NEON + ZOOM */
 .cta{
   display:inline-block;
   padding:16px 42px;
@@ -114,11 +138,18 @@ body{
   font-weight:900;
   text-decoration:none;
   margin-top:12px;
-  animation:btnZoom 1.3s infinite alternate;
+  position:relative;
+  animation:btnZoom 1.5s infinite alternate;
+  box-shadow:0 0 10px #00eaff,0 0 20px #ffd700,0 0 30px #ff3cac;
+  transition:0.2s;
+}
+.cta:hover{
+  box-shadow:0 0 25px #00eaff,0 0 50px #ffd700,0 0 80px #ff3cac;
+  transform:scale(1.2);
 }
 @keyframes btnZoom{
   from{transform:scale(1);}
-  to{transform:scale(1.25);}
+  to{transform:scale(1.1);}
 }
 </style>
 </head>
@@ -148,11 +179,12 @@ body{
 </div>
 
 <script>
-// TIMER
+// TIMER WITH URGENCY
 let sec=60;
 const timer=document.getElementById("timer");
 setInterval(()=>{
   timer.innerText="0:"+String(sec).padStart(2,"0");
+  if(sec<=10) timer.classList.add("alert"); 
   if(sec>0) sec--;
 },1000);
 
@@ -166,10 +198,10 @@ let i=0;
 const logo=document.getElementById("logo");
 setInterval(()=>{
   i=(i+1)%imgs.length;
-  logo.style.animation="none"; // reset animation
-  void logo.offsetWidth; // trigger reflow
+  logo.style.animation="none"; 
+  void logo.offsetWidth;       
   logo.src=imgs[i];
-  logo.style.animation="slideIn 0.7s ease forwards"; // slide inside effect
+  logo.style.animation="slideRotate 0.8s ease forwards"; 
 },2000);
 </script>
 </body>
