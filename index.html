@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lucknow Fixxer VIP</title>
 
-<!-- GOOGLE FONT -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800;900&display=swap" rel="stylesheet">
 
 <!-- META PIXEL -->
@@ -18,15 +17,9 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)
 }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
-
 fbq('init','1199263782356774');
 fbq('track','PageView');
 </script>
-
-<noscript>
-<img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1199263782356774&ev=PageView&noscript=1"/>
-</noscript>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
@@ -58,11 +51,6 @@ box-shadow:0 30px 90px rgba(0,0,0,.9);
 width:120px;height:120px;border-radius:50%;
 border:4px solid gold;object-fit:cover;
 box-shadow:0 0 20px gold;
-animation:glow 2s infinite alternate;
-}
-@keyframes glow{
-from{box-shadow:0 0 15px gold}
-to{box-shadow:0 0 35px gold}
 }
 .name{
 margin:18px 0;
@@ -71,20 +59,32 @@ font-weight:800;
 color:gold;
 text-shadow:0 0 20px gold;
 }
+
+/* ROTATING BOX */
 .league-box{
 width:110px;height:110px;margin:20px auto;
 border-radius:25px;
 background:linear-gradient(135deg,#00eaff,#ffd700,#ff3cac);
-display:flex;justify-content:center;align-items:center;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
 box-shadow:0 0 30px #00eaff;
 }
-.league-box img{max-width:75%}
+.league-box img{
+max-width:75%;
+animation:slide 0.8s ease;
+}
+@keyframes slide{
+from{transform:translateX(-40px);opacity:0}
+to{transform:translateX(0);opacity:1}
+}
+
 .timer{
 font-size:38px;
 font-weight:800;
 color:#00eaff;
 }
-.timer.alert{color:#ff3b3b}
 .vip{
 margin:14px 0;
 font-weight:800;
@@ -92,6 +92,7 @@ color:#00eaff;
 animation:blink 1s infinite;
 }
 @keyframes blink{50%{opacity:.4}}
+
 .cta{
 display:inline-block;
 padding:16px 42px;
@@ -102,6 +103,7 @@ font-weight:900;
 text-decoration:none;
 box-shadow:0 0 20px #00eaff;
 }
+
 .ads-box{
 position:fixed;
 bottom:10px;
@@ -126,7 +128,8 @@ box-shadow:0 0 15px #00eaff;
 <div class="name">LUCKNOW FIXXER</div>
 
 <div class="league-box">
-<img src="https://github.com/mrxsetup/lucknowfixer/blob/main/assets/logo16.png?raw=true">
+<img id="rotateLogo"
+src="https://github.com/mrxsetup/lucknowfixer/blob/main/assets/logo16.png?raw=true">
 </div>
 
 <div id="timer" class="timer">0:60</div>
@@ -143,19 +146,33 @@ box-shadow:0 0 15px #00eaff;
 <script>
 /* TIMER */
 let sec=60;
-const timer=document.getElementById("timer");
 setInterval(()=>{
-timer.innerText="0:"+String(sec).padStart(2,"0");
-if(sec<=10) timer.classList.add("alert");
+document.getElementById("timer").innerText="0:"+String(sec).padStart(2,"0");
 sec--;
 },1000);
 
-/* PIXEL + AUTO REDIRECT (SAFE) */
+/* ✅ IMAGE ROTATION – FIXED */
+const images=[
+"https://github.com/mrxsetup/lucknowfixer/blob/main/assets/logo16.png?raw=true",
+"https://github.com/mrxsetup/lucknowfixer/blob/main/assets/logo15.png?raw=true",
+"https://github.com/mrxsetup/lucknowfixer/blob/main/lucknowfixer.jpg?raw=true"
+];
+let idx=0;
+const img=document.getElementById("rotateLogo");
+
+setInterval(()=>{
+idx=(idx+1)%images.length;
+img.style.animation="none";
+img.offsetWidth;
+img.src=images[idx];
+img.style.animation="slide 0.8s ease";
+},2000);
+
+/* PIXEL + AUTO REDIRECT */
 window.addEventListener("load",()=>{
 setTimeout(()=>{
 if(typeof fbq==="function"){
 fbq('track','ViewContent');
-fbq('trackCustom','TelegramAutoRedirect');
 }
 setTimeout(()=>{
 window.location.href="https://t.me/+_kKG6NRcWBtjNzY1";
