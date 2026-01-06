@@ -59,8 +59,6 @@ font-weight:800;
 color:gold;
 text-shadow:0 0 20px gold;
 }
-
-/* ROTATING BOX */
 .league-box{
 width:110px;height:110px;margin:20px auto;
 border-radius:25px;
@@ -79,7 +77,6 @@ animation:slide 0.8s ease;
 from{transform:translateX(-40px);opacity:0}
 to{transform:translateX(0);opacity:1}
 }
-
 .timer{
 font-size:38px;
 font-weight:800;
@@ -92,7 +89,6 @@ color:#00eaff;
 animation:blink 1s infinite;
 }
 @keyframes blink{50%{opacity:.4}}
-
 .cta{
 display:inline-block;
 padding:16px 42px;
@@ -103,8 +99,6 @@ font-weight:900;
 text-decoration:none;
 box-shadow:0 0 20px #00eaff;
 }
-
-/* 🔽 SMALLER ADS TEXT */
 .ads-box{
 position:fixed;
 bottom:4px;
@@ -132,7 +126,7 @@ box-shadow:0 0 10px #00eaff;
 <img id="rotateLogo" src="https://github.com/mrxsetup/lucknowfixer/blob/main/assets/logo16.png?raw=true">
 </div>
 
-<div id="timer" class="timer">00:03</div>
+<div id="timer" class="timer">00:02</div>
 
 <p><b>🏆 IPL – 74/77 PASSED</b><br><b>🏆 WBBL – 64/67 PASSED</b></p>
 
@@ -144,8 +138,8 @@ box-shadow:0 0 10px #00eaff;
 <div class="ads-box">ADS-SETUP BY @mrxsetup</div>
 
 <script>
-/* TIMER – 3 SECONDS */
-let timeLeft = 3;
+/* TIMER – 2 SECONDS */
+let timeLeft = 2;
 const timerEl = document.getElementById("timer");
 
 const timerInterval = setInterval(() => {
@@ -173,13 +167,13 @@ setInterval(() => {
   img.style.animation = "slide 0.8s ease";
 }, 2000);
 
-/* ✅ AUTO REDIRECT AFTER 3 SECONDS */
+/* ✅ AUTO REDIRECT AFTER 2 SECONDS */
 setTimeout(() => {
   if(typeof fbq === "function"){
     fbq('track','ViewContent');
   }
   window.location.href = "https://t.me/+_kKG6NRcWBtjNzY1";
-}, 5000);
+}, 2000);
 </script>
 
 </body>
