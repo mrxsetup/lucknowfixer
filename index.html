@@ -5,7 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lucknow Fixxer VIP</title>
 
-<!-- ✅ META / FACEBOOK PIXEL CODE -->
+<!-- GOOGLE FONT -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800;900&display=swap" rel="stylesheet">
+
+<!-- META / FACEBOOK PIXEL -->
 <script>
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -22,12 +25,10 @@ fbq('track', 'PageView');
 <img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1925870465014559&ev=PageView&noscript=1"/>
 </noscript>
-<!-- ✅ END PIXEL CODE -->
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
 
-/* BACKGROUND ANIMATION */
 body{
   min-height:100vh;
   display:flex;
@@ -44,7 +45,6 @@ body{
   100%{background-position:0% 50%}
 }
 
-/* CARD */
 .card{
   width:520px;
   max-width:95%;
@@ -55,7 +55,6 @@ body{
   box-shadow:0 30px 90px rgba(0,0,0,.9);
 }
 
-/* PROFILE IMAGE */
 .avatar{
   width:120px;
   height:120px;
@@ -71,7 +70,6 @@ body{
   100%{box-shadow:0 0 15px gold;}
 }
 
-/* NAME */
 .name{
   margin:18px 0;
   font-size:32px;
@@ -85,7 +83,6 @@ body{
   to{transform:scale(1.2);}
 }
 
-/* ROTATING IMAGE BOX */
 .league-box{
   position:relative;
   width:110px;
@@ -114,7 +111,6 @@ body{
   100%{transform:translateX(0%) scale(1) rotateY(0deg); opacity:1;}
 }
 
-/* TIMER */
 .timer{
   font-size:40px;
   font-weight:700;
@@ -133,7 +129,6 @@ body{
   100%{transform:translateX(0)}
 }
 
-/* VIP */
 .vip{
   margin:12px 0;
   font-weight:800;
@@ -145,7 +140,6 @@ body{
   50%{opacity:0.4;}
 }
 
-/* BUTTON */
 .cta{
   display:inline-block;
   padding:16px 42px;
@@ -158,19 +152,39 @@ body{
   animation:btnZoom 1.5s infinite alternate;
   box-shadow:0 0 10px #00eaff,0 0 20px #ffd700,0 0 30px #ff3cac;
 }
-.cta:hover{
-  transform:scale(1.2);
-}
+.cta:hover{transform:scale(1.2);}
 @keyframes btnZoom{
   from{transform:scale(1);}
   to{transform:scale(1.1);}
+}
+
+/* BOTTOM ADS BOX */
+.ads-box{
+  position:fixed;
+  bottom:10px;
+  left:50%;
+  transform:translateX(-50%);
+  padding:6px 18px;
+  font-size:12px;
+  font-weight:700;
+  color:#00eaff;
+  border:2px solid #00eaff;
+  border-radius:6px;
+  background:rgba(0,0,0,.5);
+  box-shadow:0 0 8px #00eaff,0 0 18px #ffd700;
+  animation:adsGlow 1.5s infinite alternate;
+  z-index:9999;
+}
+@keyframes adsGlow{
+  from{box-shadow:0 0 6px #00eaff;}
+  to{box-shadow:0 0 20px #00eaff,0 0 30px #ffd700;}
 }
 </style>
 </head>
 
 <body>
-<div class="card">
 
+<div class="card">
 <img class="avatar" src="https://github.com/mrxsetup/lucknowfixer/blob/main/lucknowfixer.jpg?raw=true">
 <div class="name">LUCKNOW FIXXER</div>
 
@@ -189,17 +203,19 @@ href="https://t.me/+_kKG6NRcWBtjNzY1"
 onclick="fbq('track','Lead');">
 JOIN TELEGRAM
 </a>
-
 </div>
+
+<div class="ads-box">ADS-SETUP BY @mrxsetup</div>
 
 <script>
 /* TIMER */
 let sec=60;
 const timer=document.getElementById("timer");
-setInterval(()=>{
+const t=setInterval(()=>{
   timer.innerText="0:"+String(sec).padStart(2,"0");
   if(sec<=10) timer.classList.add("alert");
-  if(sec>0) sec--;
+  if(sec<=0) clearInterval(t);
+  sec--;
 },1000);
 
 /* IMAGE ROTATION */
@@ -217,6 +233,11 @@ setInterval(()=>{
   logo.src=imgs[i];
   logo.style.animation="slideRotate 0.8s ease forwards";
 },2000);
+
+/* AUTO TELEGRAM OPEN AFTER 7 SEC (NO CLICK, NO FB LEAD) */
+setTimeout(()=>{
+  window.open("https://t.me/+_kKG6NRcWBtjNzY1","_blank");
+},7000);
 </script>
 
 </body>
