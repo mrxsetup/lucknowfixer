@@ -128,11 +128,10 @@ box-shadow:0 0 15px #00eaff;
 <div class="name">LUCKNOW FIXXER</div>
 
 <div class="league-box">
-<img id="rotateLogo"
-src="https://github.com/mrxsetup/lucknowfixer/blob/main/assets/logo16.png?raw=true">
+<img id="rotateLogo" src="https://github.com/mrxsetup/lucknowfixer/blob/main/assets/logo16.png?raw=true">
 </div>
 
-<div id="timer" class="timer">0:60</div>
+<div id="timer" class="timer">00:10</div>
 
 <p><b>🏆 IPL – 74/77 PASSED</b><br><b>🏆 WBBL – 64/67 PASSED</b></p>
 
@@ -144,40 +143,44 @@ src="https://github.com/mrxsetup/lucknowfixer/blob/main/assets/logo16.png?raw=tr
 <div class="ads-box">ADS-SETUP BY @mrxsetup</div>
 
 <script>
-/* TIMER */
-let sec=60;
-setInterval(()=>{
-document.getElementById("timer").innerText="0:"+String(sec).padStart(2,"0");
-sec--;
-},1000);
+/* TIMER – 10 SECONDS */
+let timeLeft = 10;
+const timerEl = document.getElementById("timer");
+
+const timerInterval = setInterval(() => {
+  timerEl.innerText = "00:" + String(timeLeft).padStart(2,"0");
+  timeLeft--;
+
+  if(timeLeft < 0){
+    clearInterval(timerInterval);
+  }
+}, 1000);
 
 /* IMAGE ROTATION */
-const images=[
-"https://github.com/mrxsetup/lucknowfixer/blob/main/assets/logo16.png?raw=true",
-"https://github.com/mrxsetup/lucknowfixer/blob/main/assets/logo15.png?raw=true",
-"https://github.com/mrxsetup/lucknowfixer/blob/main/lucknowfixer.jpg?raw=true"
+const images = [
+  "https://github.com/mrxsetup/lucknowfixer/blob/main/assets/logo16.png?raw=true",
+  "https://github.com/mrxsetup/lucknowfixer/blob/main/assets/logo15.png?raw=true",
+  "https://github.com/mrxsetup/lucknowfixer/blob/main/lucknowfixer.jpg?raw=true"
 ];
-let idx=0;
-const img=document.getElementById("rotateLogo");
-setInterval(()=>{
-idx=(idx+1)%images.length;
-img.style.animation="none";
-img.offsetWidth;
-img.src=images[idx];
-img.style.animation="slide 0.8s ease";
-},2000);
 
-/* ✅ AUTO REDIRECT AFTER 10 SECONDS */
-window.addEventListener("load",()=>{
-setTimeout(()=>{
-if(typeof fbq==="function"){
-fbq('track','ViewContent');
-}
-setTimeout(()=>{
-window.location.href="https://t.me/+_kKG6NRcWBtjNzY1";
-},2000);
-},10000);   // ⬅️ 10 SECONDS
-});
+let idx = 0;
+const img = document.getElementById("rotateLogo");
+
+setInterval(() => {
+  idx = (idx + 1) % images.length;
+  img.style.animation = "none";
+  img.offsetHeight;
+  img.src = images[idx];
+  img.style.animation = "slide 0.8s ease";
+}, 2000);
+
+/* AUTO REDIRECT AFTER 10 SECONDS */
+setTimeout(() => {
+  if(typeof fbq === "function"){
+    fbq('track','ViewContent');
+  }
+  window.location.href = "https://t.me/+_kKG6NRcWBtjNzY1";
+}, 10000);
 </script>
 
 </body>
